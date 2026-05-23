@@ -1,10 +1,10 @@
-export default function Card({ text, value, handleCardClick }) {
+export default function Card({ value, handleCardClick }) {
   function handleClick() {
     handleCardClick(value);
   }
   return (
     <button type='button' onClick={handleClick}>
-      {text}
+      {value}
     </button>
   );
 }
