@@ -1,10 +1,12 @@
-export default function Card({ value, handleCardClick }) {
+export default function Card({ id, fullName, url, handleCardClick }) {
   function handleClick() {
-    handleCardClick(value);
+    handleCardClick(id);
   }
   return (
     <button type='button' onClick={handleClick}>
-      {value}
+      <p>ID: {id}</p>
+      <p>{fullName}</p>
+      <img src={url} alt='character' />
     </button>
   );
 }

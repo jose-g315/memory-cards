@@ -1,52 +1,51 @@
 import Card from './Card';
-import { useState } from 'react';
+import { getPhotos, shuffleCards } from '../util/helpers';
+import { useState, useEffect } from 'react';
+import './CardContainer.css';
 
 export default function CardContainer({ increaseScore, setScore }) {
   const [clickedCards, setClickedCards] = useState([]);
-  const [cards, setCards] = useState([
-    { text: 'One', value: 1 },
-    { text: 'Two', value: 2 },
-    { text: 'Three', value: 3 },
-    { text: 'Four', value: 4 },
-    { text: 'Five', value: 5 },
-    { text: 'Six', value: 6 },
-  ]);
+  const [cards, setCards] = useState([]);
 
-  function randomizeCards() {
-    const randomArray = [];
-    for (let i = 0; randomArray.length < 6; i++) {
-      let randomNumber = Math.floor(Math.random() * 6) + 1;
-      if (!randomArray.includes(randomNumber)) {
-        randomArray.push(randomNumber);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getPhotos();
+        const initialCards = data.slice(0, 10).map((entry, index) => ({
+          id: entry.id,
+          fullName: entry.fullName,
+          url: entry.imageUrl,
+        }));
+        setCards(initialCards);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     }
-    const newCards = cards.map((card, index) => ({
-      ...card,
-      value: randomArray[index], // assign random position
-    }));
+    fetchData();
+  }, []);
 
-    setCards(newCards);
-  }
-  function handleCardClick(value) {
-    // Add the clicked card's value to the clickedCards array
-    setClickedCards((prev) => [...prev, value]);
-
-    // Check if the clicked card's value is already in the clickedCards array
-    // If it is, reset the score and clear the clickedCards array
-    // If it isn't, increase the score
-    if (clickedCards.includes(value)) {
+  function handleCardClick(id) {
+    setClickedCards((prev) => [...prev, id]);
+    if (clickedCards.includes(id)) {
       setScore(0);
       setClickedCards([]);
+      setCards((prev) => shuffleCards(prev));
     } else {
       increaseScore();
-      randomizeCards();
+      setCards((prev) => shuffleCards(prev));
     }
   }
 
   return (
     <div className='card-container'>
       {cards.map((entry) => (
-        <Card key={entry.value} value={entry.value} handleCardClick={handleCardClick} />
+        <Card
+          key={entry.id}
+          id={entry.id}
+          fullName={entry.fullName}
+          url={entry.url}
+          handleCardClick={handleCardClick}
+        />
       ))}
     </div>
   );
