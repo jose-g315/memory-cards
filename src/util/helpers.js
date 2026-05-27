@@ -1,11 +1,21 @@
-async function getPhotos() {
-  const response = await fetch('https://thronesapi.com/api/v2/Characters');
+async function fetchData(set) {
+  const response = await fetch(`https://futuramaapi.com/api/characters/?size=${set}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   return data;
+}
+
+function formatData(data) {
+  const results = data.items;
+  const initialCards = results.map((entry) => ({
+    id: entry.id,
+    name: entry.name,
+    img: entry.image,
+  }));
+  return initialCards;
 }
 
 function shuffleCards(cards) {
@@ -17,4 +27,4 @@ function shuffleCards(cards) {
   return shuffled;
 }
 
-export { getPhotos, shuffleCards };
+export { fetchData, formatData, shuffleCards };

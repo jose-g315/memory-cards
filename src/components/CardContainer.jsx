@@ -1,28 +1,25 @@
 import Card from './Card';
-import { getPhotos, shuffleCards } from '../util/helpers';
+import { fetchData, formatData, shuffleCards } from '../util/helpers';
 import { useState, useEffect } from 'react';
 import './CardContainer.css';
 
 export default function CardContainer({ increaseScore, setScore }) {
   const [clickedCards, setClickedCards] = useState([]);
   const [cards, setCards] = useState([]);
+  const [cardsSet, setCardsSet] = useState('8');
 
   useEffect(() => {
-    async function fetchData() {
+    async function getCards() {
       try {
-        const data = await getPhotos();
-        const initialCards = data.slice(0, 10).map((entry, index) => ({
-          id: entry.id,
-          fullName: entry.fullName,
-          url: entry.imageUrl,
-        }));
-        setCards(initialCards);
+        const data = await fetchData(cardsSet);
+        const formatedData = formatData(data);
+        setCards(formatedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
-    fetchData();
-  }, []);
+    getCards();
+  }, [cardsSet]);
 
   function handleCardClick(id) {
     setClickedCards((prev) => [...prev, id]);
@@ -35,18 +32,35 @@ export default function CardContainer({ increaseScore, setScore }) {
       setCards((prev) => shuffleCards(prev));
     }
   }
-
+  function handleButtonClick(type) {
+    setCardsSet(type);
+    setClickedCards([]);
+    setScore(0);
+  }
   return (
-    <div className='card-container'>
-      {cards.map((entry) => (
-        <Card
-          key={entry.id}
-          id={entry.id}
-          fullName={entry.fullName}
-          url={entry.url}
-          handleCardClick={handleCardClick}
-        />
-      ))}
-    </div>
+    <>
+      <div>
+        <button type='button' className='card-set' onClick={() => handleButtonClick('8')}>
+          Easy
+        </button>
+        <button type='button' className='card-set' onClick={() => handleButtonClick('12')}>
+          Medium
+        </button>
+        <button type='button' className='card-set' onClick={() => handleButtonClick('16')}>
+          Hard
+        </button>
+      </div>
+      <div className='card-container'>
+        {cards.map((entry) => (
+          <Card
+            key={entry.id}
+            id={entry.id}
+            fullName={entry.name}
+            url={entry.img}
+            handleCardClick={handleCardClick}
+          />
+        ))}
+      </div>
+    </>
   );
 }

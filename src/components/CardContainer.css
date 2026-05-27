@@ -4,14 +4,14 @@
   justify-content: center;
   gap: 20px;
 }
-button {
+.card-container > button {
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
 }
 img {
-  width: 250px;
-  height: 250px;
+  width: 125px;
+  height: 175px;
   object-fit: cover;
 }
