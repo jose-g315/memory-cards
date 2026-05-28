@@ -14,7 +14,7 @@ function App() {
     }
   }
   return (
-    <div>
+    <div className='app'>
       <ScoreBoard score={score} highScore={highScore} />
       <CardContainer increaseScore={increaseScore} setScore={setScore} />
     </div>

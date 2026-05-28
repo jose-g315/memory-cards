@@ -1,0 +1,35 @@
+:root {
+  --primary-color: #ff6b00;
+  --secondary-color: #ffffff;
+  --accent-color: #00e5ff;
+  --background-color: #0a0e27;
+  --font-family: "franklin gothic heavy", "Arial, Helvetica, sans-serif";
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  background-image: radial-gradient(ellipse at 50% 20%, #1c1260 0%, #0a0e27 65%);
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+}
+.score-board {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 1vw, 2.2rem);
+}
+.score-board h1 {
+  color: var(--primary-color);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.score-board p {
+  color: var(--accent-color);
+}

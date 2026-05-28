@@ -6,7 +6,7 @@ import './CardContainer.css';
 export default function CardContainer({ increaseScore, setScore }) {
   const [clickedCards, setClickedCards] = useState([]);
   const [cards, setCards] = useState([]);
-  const [cardsSet, setCardsSet] = useState('8');
+  const [cardsSet, setCardsSet] = useState('6');
 
   useEffect(() => {
     async function getCards() {
@@ -39,14 +39,14 @@ export default function CardContainer({ increaseScore, setScore }) {
   }
   return (
     <>
-      <div>
-        <button type='button' className='card-set' onClick={() => handleButtonClick('8')}>
+      <div className='difficulty-container'>
+        <button type='button' className='card-set' onClick={() => handleButtonClick('6')}>
           Easy
         </button>
         <button type='button' className='card-set' onClick={() => handleButtonClick('12')}>
           Medium
         </button>
-        <button type='button' className='card-set' onClick={() => handleButtonClick('16')}>
+        <button type='button' className='card-set' onClick={() => handleButtonClick('18')}>
           Hard
         </button>
       </div>

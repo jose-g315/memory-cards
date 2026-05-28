@@ -4,9 +4,8 @@ export default function Card({ id, fullName, url, handleCardClick }) {
   }
   return (
     <button type='button' onClick={handleClick}>
-      <p>ID: {id}</p>
-      <p>{fullName}</p>
-      <img src={url} alt='character' />
+      <img src={url} alt={fullName} />
+      <span>{fullName}</span>
     </button>
   );
 }
