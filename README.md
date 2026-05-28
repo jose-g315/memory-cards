@@ -1,16 +1,11 @@
-# React + Vite
+# Memory Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Futurama-themed memory card game built with React. The goal is to click every card exactly once without repeating. Each correct click scores a point and the cards shuffle. Click one you already picked and you start over.
 
-Currently, two official plugins are available:
+## How to play
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Pick a difficulty, then click cards without repeating any. Try to beat your high score.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Easy** — 6 cards
+- **Medium** — 12 cards
+- **Hard** — 18 cards
