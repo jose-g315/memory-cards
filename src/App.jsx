@@ -10,7 +10,7 @@ function App() {
   function increaseScore() {
     setScore(score + 1);
     if (score >= highScore) {
-      setHighScore(highScore + 1);
+      setHighScore((prev) => Math.max(prev, score + 1));
     }
   }
   return (
