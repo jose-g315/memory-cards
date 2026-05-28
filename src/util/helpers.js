@@ -1,10 +1,9 @@
 async function fetchData(set) {
-  const response = await fetch(`https://futuramaapi.com/api/characters/?size=${set}`);
+  const response = await fetch(`/api/characters?size=${set}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
